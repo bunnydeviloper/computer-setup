@@ -14,3 +14,4 @@
 * vim .gitconfig (copy content form your computer, this version is slight "complicated")
 * vim .vimrc
   * to be continue
+* install bash-completion to make your life easier: [source](https://github.com/scop/bash-completion)
