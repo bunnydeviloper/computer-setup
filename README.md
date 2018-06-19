@@ -12,6 +12,14 @@
   * git config --global merge.conflictstyle diff3
   * git config --list // view all current configuration
 * vim .gitconfig (copy content form your computer, this version is slight "complicated")
-* vim .vimrc
-  * to be continue
-* install bash-completion to make your life easier: [source](https://github.com/scop/bash-completion)
+* install vim plugins to make your life easier:
+  * Vundle: `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+  * Install Silver Searcher: `brew install the_silver_searcher`
+  * Install fuzzy finder: `brew install fzf`
+  * Install Tmux: `brew install tmux`
+    * Setup tmux colors: `echo 'set -g default-terminal "screen-256color"' > ~/.tmux.conf`
+* vim .vimrc (copy content from your computer)
+* install all the plugins specified in .vimrc file:
+  * Launch `vim` and run `:PluginInstall` (to install from command line: `vim +PluginInstall +qall`)
+  * Installation progress and result will show up on the left pane of Vim.
+
