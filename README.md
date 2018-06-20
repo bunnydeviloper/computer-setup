@@ -19,7 +19,7 @@
 * Slightly complicated (aka **AWESOME**) configuration: use .gitconfig
 
 ### Vim is for pro-programmers, but remmeber: 'Your computer is only as smart as you are!'
-* copy .vimrc (file credit: multiple sources, from the best of the best, including some from myself :smile::smile:smile:)
+* copy .vimrc (file credit: multiple sources, from the best of the best, including some from myself :smile::smile::smile:)
 * install vim plugins to make your life easier:
   * Vundle: `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
   * Install Silver Searcher: `brew install the_silver_searcher`
