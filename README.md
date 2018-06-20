@@ -1,22 +1,21 @@
 # Sophia's dotfiles for computer-setup
 
 **Note**: make sure you are in home directory (type `cd` or `~`)
-* All-Inclusive option: clone this repo and move all files to home directory
+* All-Inclusive option: clone this repo and move all files to home directory (note: use `ls -a` to see the dotfiles)
 
 ### Set up your shell / terminal / bash environment
-* copy .bashrc (file credit: Udacity)
+* copy .bashrc (**AWESOME**)
   * to make sure this file get run: `source ~/.bashrc`
 
 ### Git is powerful, we should take a selfie with it ("snapshot" joke, get it? :smile::smile::smile:)
 * copy .git-completion.bash file ([source](https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash))
 * copy .git-prompt.sh ([source](https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh))
-* simple first time git configuration: (**baby step!**)
+* simple first time git configuration: (see more in .gitconfig)
   * git config --global user.name "<Your-Full-Name>"
   * git config --global user.email "<your-email-address>"
   * git config --global color.ui auto
   * git config --global merge.conflictstyle diff3
   * git config --list // view all current configuration
-* Slightly complicated (aka **AWESOME**) configuration: use .gitconfig
 
 ### Vim is for pro-programmers, but remmeber: 'Your computer is only as smart as you are!'
 * copy .vimrc (file credit: multiple sources, from the best of the best, including some from myself :smile::smile::smile:)
