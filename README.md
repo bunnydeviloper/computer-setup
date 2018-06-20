@@ -1,17 +1,16 @@
 # computer-setup
 
-**Note**: make sure you are in home directory (type `cd` or `~`)  
+**Note**: make sure you are in home directory (type `cd` or `~`)
 * All-Inclusive option: clone this repo and move all files to home directory
 
 ### Set up your shell / terminal / bash environment
 * copy .bashrc (file credit: Udacity)
-  * to access this file later: `vim ~/.bashrc`
   * to make sure this file get run: `source ~/.bashrc`
 
-### Git is powerful, we should take a selfie with it ("snapshot" joke, get it? :laugh:)
+### Git is powerful, we should take a selfie with it ("snapshot" joke, get it? :smile::smile::smile:)
 * copy .git-completion.bash file [source](https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash)
 * copy .git-prompt.sh [source](https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh)
-* simple first time git configuration: (or you can use .gitconfig file below)
+* simple first time git configuration: (**baby step!**)
   * git config --global user.name "<Your-Full-Name>"
   * git config --global user.email "<your-email-address>"
   * git config --global color.ui auto
