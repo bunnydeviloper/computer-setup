@@ -11,10 +11,21 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx          # Light Blue for Directories
 export EDITOR=vim
 
 # Other useful alias
-alias gs="ssh sophiaaa@llip.life"   # alias to ssh into garageScript
-alias la="ls -aF"                   # list all files (including hidden) in short format, flag -F will add special char. at the end
-alias ll="ls -aFl"                  # long format
-alias src="source ~/.bashrc"        # alias to refresh the environment if you make changes to .bashrc
+alias llip="ssh sophiaaa@llip.life"   # alias to ssh into garageScript
+alias la="ls -aF"                     # list all files (including hidden) in short format, flag -F will add special char. at the end
+alias ll="ls -aFl"                    # long format
+alias src="source ~/.bashrc"          # alias to refresh the environment if you make changes to .bashrc
+# Alias for git
+alias g="git"
+alias ga="git add ."
+alias gb="git branch"
+alias gd="git diff"
+alias gf="git fetch"
+alias gs="git status"
+alias gcm="git commit -m"
+alias gco="git checkout"
+alias rebase="git rebase origin/master"
+alias push="git push origin master"
 
 # Useful commands - lcd changes directory and ls
 function changeDirectory {
