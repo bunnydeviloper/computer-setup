@@ -235,6 +235,13 @@ augroup END
 autocmd InsertEnter * :set nornu
 autocmd InsertLeave * :set rnu
 
+" Mark the 101 column
+if exists('+colorcolumn')
+  set colorcolumn=101
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+endif
+
 " Use Perl regex by default
 " nnoremap / /\v
 " vnoremap / /\v
