@@ -26,6 +26,7 @@ alias gcm="git commit -m"
 alias gco="git checkout"
 alias rebase="git rebase origin/master"
 alias push="git push origin master"
+alias log="git log --oneline --graph --decorate"
 
 # Useful commands - lcd changes directory and ls
 function changeDirectory {
