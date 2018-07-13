@@ -1,76 +1,76 @@
-let g:jsx_ext_required = 0    " not sure what this is???
+let g:jsx_ext_required = 0    " Allow JSX in normal JS files, specifically for React user
 
 set nocompatible              " be iMproved, required, prevent behaving like vi
 filetype off                  " required
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vundle begin
+" ---------- Vundle begin ----------
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" plugins on original GitHub repos
-Plugin 'https://github.com/tpope/vim-vividchalk.git'
-Plugin 'https://github.com/Reewr/vim-monokai-phoenix'
-Plugin 'https://github.com/crusoexia/vim-monokai'
-Plugin 'https://github.com/crusoexia/vim-javascript-lib'
-Plugin 'https://github.com/scrooloose/nerdtree.git'
-Plugin 'AutoComplPop'
-Plugin 'mxw/vim-jsx'
-Plugin 'mileszs/ack.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'https://github.com/scrooloose/syntastic'
-Plugin 'https://github.com/godlygeek/tabular'
-Plugin 'https://github.com/tpope/vim-unimpaired'
-Plugin 'https://github.com/itspriddle/vim-marked'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mtscout6/syntastic-local-eslint.vim'
+" list of plugins on original GitHub repos
+" Plugin 'mileszs/ack.vim'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+" Plugin 'https://github.com/tpope/vim-vividchalk.git'
+" Plugin 'https://github.com/Reewr/vim-monokai-phoenix'
+" Plugin 'https://github.com/crusoexia/vim-monokai'
+" Plugin 'https://github.com/crusoexia/vim-javascript-lib'
+" Plugin 'https://github.com/scrooloose/nerdtree.git'
+" Plugin 'AutoComplPop'
+" Plugin 'mxw/vim-jsx'
+" Plugin 'kien/ctrlp.vim'
+" Plugin 'mattn/emmet-vim'
+" Plugin 'Lokaltog/vim-easymotion'
+" Plugin 'https://github.com/scrooloose/syntastic'
+" Plugin 'https://github.com/godlygeek/tabular'
+" Plugin 'https://github.com/tpope/vim-unimpaired'
+" Plugin 'https://github.com/itspriddle/vim-marked'
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'mtscout6/syntastic-local-eslint.vim'
 
-" Brief help
+call vundle#end()            " All of your Plugins must be added before this line
+
+" Brief help (see :h vundle for more details or wiki for FAQ)
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Vundle end ----------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " ---------- Plugins Related Settings begin ----------
 " set up ignore for ctrlp
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|node_modules|platforms|Build)$'
-let g:ctrlp_working_path_mode = 'r'
+" set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+" let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|node_modules|platforms|Build)$'
+" let g:ctrlp_working_path_mode = 'r'
 
 " syntastic
-let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_checkers = ['eslint']
 
-" Silver Searcher, use Ack in case your vimrc is used on a system without Ag available
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
 " leader key (map \ key to , key)
 let mapleader=","
+" nnoremap <leader>a :Ack!<Space>
+" let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+
 " Open a new tab and search for something
-" nmap <leader>a :tab split<CR>:Ack ""<Left>
+"nmap <leader>a :tab split<CR>:Ack ""<Left>
 " Immediately search for the word under the cursor in a new tab
-" nmap <leader>A :tab split<CR>:Ack <C-r><C-w><CR>
-" open ag.vim
-" nnoremap <leader>a :Ag
+"nmap <leader>A :tab split<CR>:Ack <C-r><C-w><CR>
+
 
 " fzf fuzzy finder, add this line if installed using Homebrew
-set rtp+=/usr/local/opt/fzf
+" set rtp+=/usr/local/opt/fzf
 
 " Shortcuts Shortcuts
 " map <C-f> :FZF<CR>
@@ -134,10 +134,12 @@ set statusline=%1*\ %F%m%r%h%w\ %2*\ %=\ [FORMAT=%{&ff}]\ [FILETYPE=%y]\ [POS=%l
 " Set search options
 set hlsearch          " highlight matches
 set incsearch         " Incremental search
-set smartcase         " Do smart case matching
-"set gdefault         " Subtitute all matches in a line by default
+set ignorecase        " searching is not case sensitive
+set smartcase         " if a pattern contains an uppercase letter, it is case sensitive, otherwise, it is not
+"set gdefault          " Subtitute all matches in a line by default
+
 " turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <leader>h :nohlsearch<CR>
 
 " Copy to clipboard
 " map <C-c> y:e ~/copybufferforvimclipboard<CR>P:w !pbcopy<CR><CR>:bdelete!<CR>
@@ -148,7 +150,11 @@ inoremap <leader><CR> <C-x><C-o><C-[>%i<CR><C-o>==<C-o>O
 " explain: <C-x><C-o> omni-completed '<div></div>', then <C-[> to ESC to n mode, search matching bracket to move cursor to the middle, back to i mode, <CR> to enter a new line, ESC (switch to n mode for 1 command), indent current line, ESC, insert a line above with O
 
 " vim expand code block for javascript: eg {}, or even css
-inoremap <leader>j <C-[>i<CR><C-o>==<C-o>O
+inoremap <leader><space> <C-[>i<CR><C-o>==<C-o>O
+
+
+" when in insert mode, press jk to escape
+inoremap jk <esc>
 
 " html tag format after hitting Enter
 " i,n,o means insert mode, normal mode, o mode?
@@ -177,6 +183,10 @@ nmap <leader>,, :wq!<cr>
 " nmap <C-j> <C-w>j
 " nmap <C-k> <C-w>k
 " nmap <C-l> <C-w>l
+" noremap <C-H> :tabp<CR>
+" noremap <C-L> :tabn<CR>
+" noremap <C-J> :tabc<CR>
+" noremap <C-K> :tabe<CR>
 
 set nobackup " Don't make backup before overwriting file
 set nowritebackup
@@ -234,13 +244,6 @@ augroup END
 " Set relative number in normal mode, and line number in insert mode
 autocmd InsertEnter * :set nornu
 autocmd InsertLeave * :set rnu
-
-" Mark the 101 column
-if exists('+colorcolumn')
-  set colorcolumn=101
-else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
-endif
 
 " Use Perl regex by default
 " nnoremap / /\v
