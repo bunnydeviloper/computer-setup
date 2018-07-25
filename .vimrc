@@ -19,52 +19,81 @@ let mapleader=","
 nmap <leader>, :w!<cr>
 nmap <leader>,, :wq!<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Vundle begin ----------
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set rtp+=~/.vim/bundle/Vundle.vim                " set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim                   " set the runtime path to include Vundle and initialize
 call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'                    " let Vundle manage all the vim plugins, required
+Plugin 'VundleVim/Vundle.vim'                       " let Vundle manage all the vim plugins, required
+Plugin 'Valloric/YouCompleteMe'                     " Make sure to follow http://github.com/Valloric/YouCompleteMe#full-installation-guide
+Plugin 'https://github.com/godlygeek/tabular'       " vim script for text alignment
+Plugin 'https://github.com/tomtom/tcomment_vim'     " easy, filetype comment
+Plugin 'https://github.com/scrooloose/nerdtree.git' " file system explorer, visually browse complex directory hierarchies
+Plugin 'kien/ctrlp.vim'                             " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
+Plugin 'mileszs/ack.vim'                            " search tool for Vim
 
-Plugin 'Valloric/YouCompleteMe'                  " Make sure to follow http://github.com/Valloric/YouCompleteMe#full-installation-guide
-
-Plugin 'https://github.com/godlygeek/tabular'    " vim script for text alignment
-
-Plugin 'mxw/vim-jsx'                             " for JSX in JS, not a standalone package, need js plugin below
+Plugin 'mxw/vim-jsx'                                " for JSX in JS, not a standalone package, need js plugin below
 Plugin 'pangloss/vim-javascript'
-Plugin 'crusoexia/vim-javascript-lib'            " keyword highlight of famous js libraries
-Plugin 'https://github.com/scrooloose/syntastic' " syntax/error checking
-Plugin 'mtscout6/syntastic-local-eslint.vim'     " to make syntastic compatible with JSX
-
-" Plugin 'kien/ctrlp.vim'
-" Plugin 'mileszs/ack.vim'
-" Plugin 'https://github.com/scrooloose/nerdtree.git'
-
+Plugin 'crusoexia/vim-javascript-lib'               " keyword highlight of famous js libraries
+Plugin 'https://github.com/scrooloose/syntastic'    " syntax/error checking
+Plugin 'mtscout6/syntastic-local-eslint.vim'        " to make syntastic compatible with JSX
 call vundle#end()                                " All of your Plugins must be added before this line
 " Brief help (see :h vundle for more details or wiki for FAQ)
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ---------- Vundle end ----------
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" CtrlP settings
+let g:ctrlp_working_path_mode = 'ra'                        " search current/ancestor directories
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'       " combine with ag for blazing speed
+let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules|platforms|Build)$',
+      \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\|\.DS_Store'
+      \ }
+" type C-p to start, once CtrlP is open:
+  " C-f to cycle through modes (files, buffers, mru-most recently used)
+  " C-d to search filename only instead of fullpath
+  " C-j, C-k to navigate result list
+  " C-t, C-v to open selected entry in a new tab or new split (vertical)
+  " C-n, C-p to select next/prev search string in history
+  " C-y to create a new file and its parent directories
 " set up ignore for ctrlp
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.class,.svn,*.gem
 set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
-set wildignore+=*/tmp/*,*.so,*.swp,*~,._*,*/node_modules/*,*/mobile/js/web/* " ctrlp ignores
+set wildignore+=*/tmp/*,*.so,*.swp,*~,._*,*/node_modules/*,*/mobile/js/web/* " Mac/OS
 set wildignore+=*\\tmp\\*,*.swp,*.exe                                        " Windows
-let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|node_modules|platforms|Build)$'
-let g:ctrlp_working_path_mode = 'r'
 
+" TComment keys
+nmap <leader>c :TComment<CR>
+vmap <leader>c :TCommentBlock<CR>
+
+" Syntastic settings
+let g:syntastic_check_on_open=0 " check on first load
+"let g:syntastic_error_symbol='✗'
+let g:syntastic_error_symbol='»'
+let g:syntastic_stl_format = ' %E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w} '
+"let g:syntastic_warning_symbol='⚠'
+let g:syntastic_warning_symbol='»'
 " to make syntastic compatible with JSX
 let g:syntastic_javascript_checkers = ['eslint']
 
+" Ack settings
+let g:ackprg="ack-grep -s -H --nocolor --nogroup --column --smart-case --follow"
+let g:ack_autoclose = 1    " close result window after selection
+" let g:ackpreview = 1      " to preview the result
+let g:ackhighlight = 1     " Set ackvim to highlight results
+set shellpipe=>            " prevent Ack from printing result to terminal
+" use ag (the_silver_searcher) whenever possible
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
+nnoremap <leader>a :Ack!<Space> ""<Left>
+" search for the word under the cursor
+nmap <leader>A :Ack! <C-r><C-w><CR>
+" Ack note: "q" to close search, "o" to open file, "v" to open in vsplit
+
+" Tabularize settings
 if exists(":Tabularize")
   nmap <leader>t= :Tabularize /=<CR>
   vmap <leader>t= :Tabularize /=<CR>
@@ -75,35 +104,13 @@ if exists(":Tabularize")
   vmap <leader>t! :Tabularize /:\zs<CR>
 endif
 
-" nnoremap <leader>a :Ack!<Space>
-" let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+" Nerdtree toogle
+nmap <C-o> :NERDTreeToggle<CR>
 
-" Open a new tab and search for something
-"nmap <leader>a :tab split<CR>:Ack ""<Left>
-" Immediately search for the word under the cursor in a new tab
-"nmap <leader>A :tab split<CR>:Ack <C-r><C-w><CR>
-
-
-" fzf fuzzy finder, add this line if installed using Homebrew
-" set rtp+=/usr/local/opt/fzf
-
-" Shortcuts
-" map <C-f> :FZF<CR>
-" map <C-N> :NERDTree<CR>
-" map <C-_> :Ack<CR>
-
-" Copy to clipboard
-" map <C-c> y:e ~/copybufferforvimclipboard<CR>P:w !pbcopy<CR><CR>:bdelete!<CR>
-" map <C-d> :r !pbpaste<CR><CR>
-
-" html tag format after hitting Enter
-" ??? inoremap <expr> <CR> '<CR>' . (search('\V>\%#<','bcn') ? '<Esc>O' : '')
-" ??? nnoremap <leader>m :silent !open -a Marked\ 2.app '%:p'<cr>
-" autocmd BufNewFile,BufRead *.scss setlocal filetype=css
-" autocmd BufNewFile,BufRead *.ejs set filetype=html
-" autocmd BufNewFile,BufRead *.erb set filetype=html
-
-
+" YouCompleteMe settings
+let g:ycm_allow_changing_updatetime = 0
+let g:ycm_min_num_of_chars_for_completion = 1
+"----------------------------------------------------------------------------------"
 set mouse=a           " enable scrolling with the scroll wheel for noobs
 
 set shiftwidth=2      " when you type >> in normal mode, it will indent the line for 2 columns, also = number of spaces for autoindenting
@@ -142,20 +149,32 @@ set cursorline        " draws a horizontal highlight on the line your cursor is 
 set lazyredraw        " redraw only when we need to.
 
 set title             " Screen title to currently opened file (middle top)
-set scrolloff=20             " Set at least lines visible above or below cursor. large offset = vertically centered
+set scrolloff=20      " Set at least lines visible above or below cursor. large offset = vertically centered
 set laststatus=2      " Always show the status line
 
-hi User1 ctermfg=15 ctermbg=19                " color number ranges, eg: '15' is white, '19' is royal blue
-hi User2 ctermfg=0 ctermbg=14 cterm=BOLD      " color number ranges, eg: '0' is black, '14' is sky blue
-set statusline=%1*\ %F%m%r%h%w\ %2*\ %=\ [FORMAT=%{&ff}]\ [FILETYPE=%y]\ [POS=%l,%v]\ [%p%%]\ [#Lines:%L]\ [Buffer:%n/%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]\ %{strftime(\"%m/%d/%y\ -\ %H:%M\")}
-" Status line: set 1st color, filepath, set 2nd color, align right, format, filetype, cursor position, % complete, current line, buffer #, date, and time
+" color number ranges, eg: '15' is white, '19' is royal blue, '0' is black, '14' is sky blue
+hi User1 ctermfg=15 ctermbg=19
+hi User2 ctermfg=0 ctermbg=14 cterm=BOLD
+set statusline=                                                                       " reset statusline
+set statusline+=%1*\                                                                  " set 1st color
+set statusline+=%F%m%r%h%w\                                                           " filepath
+set statusline+=%2*\                                                                  " set 2nd color
+set statusline+=%=\                                                                   " right align
+set statusline+=%y\                                                                   " filetype
+set statusline+=[%{&ff}]\                                                             " format
+set statusline+=[POS=%l,%v]\                                                          " cursor position
+set statusline+=[%p%%]\                                                               " location of cursor in %
+set statusline+=[#Lines:%L]\                                                          " current line
+set statusline+=[Buffer:%n/%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]\   " buffer #/total
+set statusline+=%{strftime(\"%m/%d/%y\ -\ %H:%M\")}                                   " date and time
 " https://hackernoon.com/the-last-statusline-for-vim-a613048959b2
 
-" Manage buffers (to alternate between buffers, use C-^)
-nnoremap <C-k> :bn<CR>
-nnoremap <C-j> :bp<CR>
-nnoremap <C-l> :bn<CR>
-nnoremap <C-h> :bp<CR>
+" easier window navigation (to alternate between buffers, use C-n)
+nmap <C-n> <C-^>
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
 
 set hidden       " Don't destroy the current buffer when you switch to another one, hide it instead (keep the undo buffer)
 set autowrite    " Save on buffer switch
@@ -173,36 +192,21 @@ nnoremap <leader>h :nohlsearch<CR>
 inoremap ( ()<C-[>i
 inoremap [ []<C-[>i
 inoremap { {}<C-[>i
-inoremap ` ``<C-[>i
-inoremap ' ''<C-[>i
-inoremap " ""<C-[>i
-inoremap < <><C-[>i
 
 " vim expand code block for javascript: eg {}, or even css (note, incorporated with auto-closed brackets)
 " <CR> to enter a new line, ESC (switch to n mode for 1 command), indent current line, ESC, insert a line above with O
 inoremap <leader>e <CR><C-o>==<C-o>O
 
-" abbreviate word+space will become... (note, incorporated with auto-closed brackets)
-abbreviate itag <img src="
-abbreviate atag <a href="<C-[>A</a<C-[>F"i
-abbreviate divtag <div<C-[>A</div<C-[>F<i
-abbreviate ptag <p<C-[>A</p<C-[>F<i
-abbreviate h1tag <h1<C-[>A</h1<C-[>F<i
-abbreviate h2tag <h2<C-[>A</h2<C-[>F<i
-abbreviate h3tag <h3<C-[>A</h3<C-[>F<i
-abbreviate h4tag <h4<C-[>A</h4<C-[>F<i
-abbreviate h5tag <h5<C-[>A</h5<C-[>F<i
-abbreviate h6tag <h6<C-[>A</h6<C-[>F<i
-
-" easier window navigation
-" nmap <C-h> <C-w>h
-" nmap <C-j> <C-w>j
-" nmap <C-k> <C-w>k
-" nmap <C-l> <C-w>l
-" noremap <C-H> :tabp<CR>
-" noremap <C-L> :tabn<CR>
-" noremap <C-J> :tabc<CR>
-" noremap <C-K> :tabe<CR>
+inoremap itag <img src=""><left><left>
+inoremap atag <a href=""></a><C-[>F"i
+inoremap divtag <div></div><C-[>F<i
+inoremap ptag <p></p><C-[>F<i
+inoremap h1tag <h1></h1><C-[>F<i
+inoremap h2tag <h2></h2><C-[>F<i
+inoremap h3tag <h3></h3><C-[>F<i
+inoremap h4tag <h4></h4><C-[>F<i
+inoremap h5tag <h5></h5><C-[>F<i
+inoremap h6tag <h6></h6><C-[>F<i
 
 set nobackup                " Don't make backup before overwriting file
 set nowritebackup
@@ -266,3 +270,20 @@ augroup AutoReloadVimRC
   au BufWritePost .vimrc so ~/.vimrc
   au BufWritePost .vimrc.local so ~/.vimrc
 augroup END
+
+" Mark the 101 columns
+if exists('+colorcolumn')
+  set colorcolumn=101
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+endif
+
+" Enable persistent undo
+if exists("+undofile")
+  set udf
+  set undodir=~/.vimundo
+endif
+
+if filereadable(glob("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
