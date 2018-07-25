@@ -26,7 +26,7 @@ alias gcm="git commit -m"
 alias gco="git checkout"
 alias rebase="git rebase origin/master"
 alias push="git push origin master"
-alias log="git log --oneline --graph --decorate"
+alias log="git log --oneline --graph"
 
 # Useful commands - lcd changes directory and ls
 function changeDirectory {
@@ -54,42 +54,13 @@ Yellow="\[\033[0;33m\]"        # Yellow
 red="\[\033[38;5;203m\]"       # Red (light)
 reset="\[\033[0m\]"
 
-# Change command prompt
-source ~/.git-prompt.sh
-export GIT_PS1_SHOWDIRTYSTATE=1
-# Various variables you might want for your PS1 prompt:
-# '\u' adds the name of the current user to the prompt (this is for Windows user???)
-# '\$(__git_ps1)' adds git-related stuff
-# '\w' adds the full path of the current directory ('\W' is short path)
-# Time12h="\T", Time12a="\@", NewLine="\n", Jobs="\j"
-
-# explain: $username\u   $gitbranch\$(__git_ps1)   $directorypath \W   \@   $   $reset"
-export PS1="$red\u$Green\$(__git_ps1)$Yellow \w $greenblue \@ $
+# Change command prompt, explain: $red\username $Green\gitbranch $Yellow\dir-fullpath $greenblue\time12a $
+export PS1="$red\u$Green\$(__git_ps1) $Yellow\w $greenblue\@ $
 $reset" # start typing on the next line
 
-# ---------------------
-### Yarn
+# show a * or + next to branch name if it's been modified
+export GIT_PS1_SHOWDIRTYSTATE=1
+
+source ~/.git-prompt.sh
+
 export PATH="$PATH:`yarn global bin`"
-
-### FZF
-# Use ag instead of the default find command for listing candidates.
-# - The first argument to the function is the base path to start traversal
-# - Note that ag only lists files not directories
-# - See the source code (completion.{bash,zsh}) for the details.
-_fzf_compgen_path() {
-  ag -g "" "$1"
-}
-
-# Setting ag as the default source for fzf
-export FZF_DEFAULT_COMMAND='ag -g ""'
-
-# To apply the command to CTRL-T as well
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
-
-# Options to fzf command
-export FZF_COMPLETION_OPTS='+c -x'
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-# ---------------------
