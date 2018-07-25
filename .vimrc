@@ -19,7 +19,7 @@ let mapleader=","
 nmap <leader>, :w!<cr>
 nmap <leader>,, :wq!<cr>
 
-" ---------- Vundle begin ----------
+" ----------------------------- Vundle begin ----------------------------
 set rtp+=~/.vim/bundle/Vundle.vim                   " set the runtime path to include Vundle and initialize
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'                       " let Vundle manage all the vim plugins, required
@@ -41,7 +41,7 @@ call vundle#end()                                " All of your Plugins must be a
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-" ---------- Vundle end ----------
+" ----------------------------- Vundle end ----------------------------
 
 " CtrlP settings
 let g:ctrlp_working_path_mode = 'ra'                        " search current/ancestor directories
@@ -63,7 +63,7 @@ set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
 set wildignore+=*/tmp/*,*.so,*.swp,*~,._*,*/node_modules/*,*/mobile/js/web/* " Mac/OS
 set wildignore+=*\\tmp\\*,*.swp,*.exe                                        " Windows
 
-" TComment keys
+" TComment settings
 nmap <leader>c :TComment<CR>
 vmap <leader>c :TCommentBlock<CR>
 
@@ -78,16 +78,15 @@ let g:syntastic_warning_symbol='»'
 let g:syntastic_javascript_checkers = ['eslint']
 
 " Ack settings
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 let g:ackprg="ack-grep -s -H --nocolor --nogroup --column --smart-case --follow"
 let g:ack_autoclose = 1    " close result window after selection
 " let g:ackpreview = 1      " to preview the result
 let g:ackhighlight = 1     " Set ackvim to highlight results
 set shellpipe=>            " prevent Ack from printing result to terminal
 " use ag (the_silver_searcher) whenever possible
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
 nnoremap <leader>a :Ack!<Space> ""<Left>
 " search for the word under the cursor
 nmap <leader>A :Ack! <C-r><C-w><CR>
@@ -152,9 +151,9 @@ set title             " Screen title to currently opened file (middle top)
 set scrolloff=20      " Set at least lines visible above or below cursor. large offset = vertically centered
 set laststatus=2      " Always show the status line
 
-" color number ranges, eg: '15' is white, '19' is royal blue, '0' is black, '14' is sky blue
 hi User1 ctermfg=15 ctermbg=19
 hi User2 ctermfg=0 ctermbg=14 cterm=BOLD
+" color number ranges, eg: '15' is white, '19' is royal blue, '0' is black, '14' is sky blue
 set statusline=                                                                       " reset statusline
 set statusline+=%1*\                                                                  " set 1st color
 set statusline+=%F%m%r%h%w\                                                           " filepath
@@ -175,6 +174,9 @@ nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
+nnoremap <Tab> gt
+nnoremap <S-Tab> gT
+" to list all buffers, type :ls or :ls! (including hidden)
 
 set hidden       " Don't destroy the current buffer when you switch to another one, hide it instead (keep the undo buffer)
 set autowrite    " Save on buffer switch
@@ -197,6 +199,7 @@ inoremap { {}<C-[>i
 " <CR> to enter a new line, ESC (switch to n mode for 1 command), indent current line, ESC, insert a line above with O
 inoremap <leader>e <CR><C-o>==<C-o>O
 
+" html shortcuts
 inoremap itag <img src=""><left><left>
 inoremap atag <a href=""></a><C-[>F"i
 inoremap divtag <div></div><C-[>F<i
