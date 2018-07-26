@@ -191,8 +191,8 @@ set smartcase         " if a pattern contains an uppercase letter, it is case se
 nnoremap <leader>h :nohlsearch<CR>
 
 " vim auto-closed brackets
-inoremap ( ()<C-[>i
-inoremap [ []<C-[>i
+" inoremap ( ()<C-[>i
+" inoremap [ []<C-[>i
 inoremap { {}<C-[>i
 
 " vim expand code block for javascript: eg {}, or even css (note, incorporated with auto-closed brackets)
