@@ -92,6 +92,10 @@ nnoremap <leader>a :Ack!<Space> ""<Left>
 nmap <leader>A :Ack! <C-r><C-w><CR>
 " Ack note: "q" to close search, "o" to open file, "v" to open in vsplit
 
+" Git settings:
+nmap <leader>g :!git status && git add % && git commit -m '' <left>
+nmap <leader>ga :!git status && git add . && git commit -m ''<left>
+
 " Tabularize settings
 if exists(":Tabularize")
   nmap <leader>t= :Tabularize /=<CR>
