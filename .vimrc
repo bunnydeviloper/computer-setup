@@ -93,6 +93,7 @@ nmap <leader>A :Ack! <C-r><C-w><CR>
 " Ack note: "q" to close search, "o" to open file, "v" to open in vsplit
 
 " Git settings:
+nmap <leader>gs :!git status
 nmap <leader>g :!git status && git add % && git commit -m '' <left>
 nmap <leader>ga :!git status && git add . && git commit -m ''<left>
 
@@ -283,6 +284,12 @@ if exists('+colorcolumn')
   set colorcolumn=101
 else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+endif
+
+" Have Vim jump to the last position when reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
 endif
 
 " Enable persistent undo
