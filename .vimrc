@@ -1,5 +1,3 @@
-let g:jsx_ext_required = 0    " Allow JSX in normal JS files, specifically for React user
-
 set nocompatible              " be iMproved, required, prevent behaving like vi
 filetype off                  " required
 
@@ -32,10 +30,16 @@ Plugin 'mileszs/ack.vim'                            " search tool for Vim
 
 Plugin 'mxw/vim-jsx'                                " for JSX in JS, not a standalone package, need js plugin below
 Plugin 'pangloss/vim-javascript'
+Plugin 'maxmellon/vim-jsx-pretty'                   " make JSX pretty and ensure indentation works
 Plugin 'crusoexia/vim-javascript-lib'               " keyword highlight of famous js libraries
 Plugin 'https://github.com/scrooloose/syntastic'    " syntax/error checking
 Plugin 'mtscout6/syntastic-local-eslint.vim'        " to make syntastic compatible with JSX
-call vundle#end()                                " All of your Plugins must be added before this line
+
+Plugin 'easymotion/vim-easymotion'                  " plugin to move around quickly w/o using numbering
+Plugin 'mattn/emmet-vim'                            " simplify writing HTML
+Plugin 'https://github.com/tpope/vim-surround'      " easily delete, change, and add surrounding in pairs
+
+call vundle#end()                                   " All of your Plugins must be added before this line
 " Brief help (see :h vundle for more details or wiki for FAQ)
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
@@ -63,9 +67,48 @@ set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
 set wildignore+=*/tmp/*,*.so,*.swp,*~,._*,*/node_modules/*,*/mobile/js/web/* " Mac/OS
 set wildignore+=*\\tmp\\*,*.swp,*.exe                                        " Windows
 
+" Surrounding notes:
+" cs"' -> change surrounding double quotes to single quotes
+" cs'<p> -> change surrouning single quotes to p-tag
+" cst<p> -> change surrounding tag to p-tag
+" dst, ds", ds' -> delete surrounding tag, delete quotes
+" yssb -> wrap entire line in parentheses
+" VS<p class="surround"> -> V to select the whole line, wrap the current line in a p-tag
+
+" Emmet-vim settings for JSX
+" default trigger key is <C-Y><leader> in all modes, now change it to '<Tab><leader>'
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
+" <Tab>/ : comment/uncomment the whole tag
+" type URL, then <Tab>a : to create an anchor tag with the url in href (use <Tab>A for blockquote)
+" idiv<Tab><leader> : to create a new div tag, same with any other tags
+" idiv>p#foo$*3>a, then <Tab>, -> create a div tag with nested p-tag (+id) with nested a-tag
+" type some content, then <Tab>, then at the 'Tag:' prompt, type 'ul>li*', or 'div>div*'
+  " => wrap the contents inside a list, or wrap the contents inside nested div
+
+" Easy-motion settings
+let g:EasyMotion_do_mapping = 0       " Disable default mappings
+" change prefix default key binding
+nmap e <Plug>(easymotion-prefix)
+" Jump to anywhere you want with 2 keystrokes, with just one key binding.
+" `s{char}{label}` or `s{char}{char}{label}`
+nmap s <Plug>(easymotion-overwin-f)
+nmap s <Plug>(easymotion-overwin-f2)
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
 " TComment settings
 nmap <leader>c :TComment<CR>
 vmap <leader>c :TCommentBlock<CR>
+
+let g:jsx_ext_required = 0        " Allow JSX in normal JS files, specifically for React user
 
 " Syntastic settings
 let g:syntastic_check_on_open=0 " check on first load
@@ -94,8 +137,15 @@ nmap <leader>A :Ack! <C-r><C-w><CR>
 
 " Git settings:
 nmap <leader>gs :!git status
-nmap <leader>g :!git status && git add % && git commit -m '' <left>
+nmap <leader>g :!git status && git add % && git commit -m ''<left>
 nmap <leader>ga :!git status && git add . && git commit -m ''<left>
+
+" Vim 'q:' and 'q/': open commandline editing window
+" use jkhl to move, type 'i' to go to insert mode for new command
+
+" search and replace :%s/foo/bar/g, '/gc' will ask for comfirmation first
+nmap <leader>r :%s//g<left><left>
+nmap <leader>rr :%s//gc<left><left><left>
 
 " Tabularize settings
 if exists(":Tabularize")
@@ -173,15 +223,16 @@ set statusline+=[Buffer:%n/%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))
 set statusline+=%{strftime(\"%m/%d/%y\ -\ %H:%M\")}                                   " date and time
 " https://hackernoon.com/the-last-statusline-for-vim-a613048959b2
 
-" easier window navigation (to alternate between buffers, use C-n)
-nmap <C-n> <C-^>
+" Easier window navigation (to alternate between buffers, use C-n)
+" to display all buffers including unlisted buffers
+nmap <leader>b :ls!
+" to switch to the next buffer
+nmap bn :bn<CR>
+
 nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-" to list all buffers, type :ls or :ls! (including hidden)
 
 set hidden       " Don't destroy the current buffer when you switch to another one, hide it instead (keep the undo buffer)
 set autowrite    " Save on buffer switch
@@ -195,26 +246,9 @@ set smartcase         " if a pattern contains an uppercase letter, it is case se
 " turn off search highlight
 nnoremap <leader>h :nohlsearch<CR>
 
-" vim auto-closed brackets
-" inoremap ( ()<C-[>i
-" inoremap [ []<C-[>i
-inoremap { {}<C-[>i
-
 " vim expand code block for javascript: eg {}, or even css (note, incorporated with auto-closed brackets)
 " <CR> to enter a new line, ESC (switch to n mode for 1 command), indent current line, ESC, insert a line above with O
 inoremap <leader>e <CR><C-o>==<C-o>O
-
-" html shortcuts
-inoremap itag <img src=""><left><left>
-inoremap atag <a href=""></a><C-[>F"i
-inoremap divtag <div></div><C-[>F<i
-inoremap ptag <p></p><C-[>F<i
-inoremap h1tag <h1></h1><C-[>F<i
-inoremap h2tag <h2></h2><C-[>F<i
-inoremap h3tag <h3></h3><C-[>F<i
-inoremap h4tag <h4></h4><C-[>F<i
-inoremap h5tag <h5></h5><C-[>F<i
-inoremap h6tag <h6></h6><C-[>F<i
 
 set nobackup                " Don't make backup before overwriting file
 set nowritebackup
