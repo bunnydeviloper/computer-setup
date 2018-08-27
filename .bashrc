@@ -12,21 +12,39 @@ export EDITOR=vim
 
 # Other useful alias
 alias llip="ssh sophiaaa@llip.life"   # alias to ssh into garageScript
-alias la="ls -aF"                     # list all files (including hidden) in short format, flag -F will add special char. at the end
+alias l="ls -aF"                      # list all files (including hidden) in short format, flag -F will add special char. at the end
 alias ll="ls -aFl"                    # long format
 alias src="source ~/.bashrc"          # alias to refresh the environment if you make changes to .bashrc
+
 # Alias for git
 alias g="git"
-alias ga="git add ."
-alias gb="git branch"
-alias gd="git diff"
-alias gf="git fetch"
 alias gs="git status"
+alias gd="git diff"
+alias ga="git add ."
+alias gA="git add -A"
 alias gcm="git commit -m"
+alias gca="git commit --amend"
+alias gn="git status && git add . && git commit -m"     # shortcut to save new commit
+alias gN="git status && git add -A && git commit -m"    # shortcut to save new commit all files
+
+alias gb="git branch"
 alias gco="git checkout"
-alias rebase="git rebase origin/master"
-alias push="git push origin master"
+alias gf="git fetch"
+alias rb="git rebase origin/master"
+alias gfrb="git fetch && git rebase origin/master"      # to be used when ABSOLUTELY sure
+alias push="git push -u origin master"  # flag -u will make sure git add tracking to origin/master
+
+alias gcl="git clone"
+alias gv="git remote -v"
+alias grao="git remote add origin"
+# alias grau="git remote add upstream"
+# alias grat="git remote add temp"
+
 alias log="git log --oneline --graph"
+alias logp1="git log -p -1"           # show the difference (patch output) for the last commit
+alias logp2="git log -p -2"           # show the different for the last 2 commits
+alias glm="git log master.."          # show changes since you branches off master forward
+alias loga="git log --oneline --graph --stat -p --all"
 
 # Useful commands - lcd changes directory and ls
 function changeDirectory {
