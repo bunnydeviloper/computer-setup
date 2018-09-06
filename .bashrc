@@ -3,6 +3,8 @@ fortune | cowsay -f small
 cowsay -f tux "Meowww... you look beautiful today."
 cowthink -e ^^`Date`
 
+# export PATH="$PATH:/c/Python36"                 # enable python on windows
+
 # Terminal colors
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx          # Light Blue for Directories
