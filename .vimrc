@@ -39,6 +39,8 @@ Plugin 'easymotion/vim-easymotion'                  " plugin to move around quic
 Plugin 'mattn/emmet-vim'                            " simplify writing HTML
 Plugin 'https://github.com/tpope/vim-surround'      " easily delete, change, and add surrounding in pairs
 
+Plugin 'leafgarland/typescript-vim'                 " typescript plugin for angular
+
 call vundle#end()                                   " All of your Plugins must be added before this line
 " Brief help (see :h vundle for more details or wiki for FAQ)
 " :PluginList       - lists configured plugins
