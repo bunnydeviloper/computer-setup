@@ -1,6 +1,8 @@
 set nocompatible              " be iMproved, required, prevent behaving like vi
 filetype off                  " required
 
+autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
+
 if has("syntax")
   syntax on                   " enables syntax highlighting by default
 endif
