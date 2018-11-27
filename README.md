@@ -2,6 +2,7 @@
 
 **Note**: make sure you are in home directory (type `cd` or `~`)
 * All-Inclusive option: clone this repo and move all files to home directory (note: use `ls -a` to see the dotfiles)
+* For Windows: download nodeJS, install, and add cowsay package (`npm install -g cowsay`)
 
 ### Set up your shell / terminal / bash environment
 * copy .bashrc (**AWESOME**)
