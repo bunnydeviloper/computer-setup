@@ -7,7 +7,7 @@
 * copy .bashrc (**AWESOME**)
   * to make sure this file get run: `source ~/.bashrc`
   * For Windows: download nodeJS, install, and add cowsay package (`npm install -g cowsay`)
-  * For Windows: also copy .bash_profile
+  * For Windows: also copy .bash_profile (which will load ~/.bashrc)
 
 ### Git is powerful, we should take a selfie with it ("snapshot" joke, get it? :smile::smile::smile:)
 * copy .git-completion.bash file ([source](https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash))
