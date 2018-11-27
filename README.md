@@ -6,8 +6,10 @@
 ### Set up your shell / terminal / bash environment
 * copy .bashrc (**AWESOME**)
   * to make sure this file get run: `source ~/.bashrc`
-  * For Windows: download nodeJS, install, and add cowsay package (`npm install -g cowsay`)
-  * For Windows: also copy .bash_profile (which will load ~/.bashrc)
+  * For Windows: 
+    * also copy .bash_profile (which will load ~/.bashrc)
+    * download nodeJS, install, and add cowsay package (`npm install -g cowsay`)
+    * if bash still doesn't load cowsay, comment out the code in ~/.bashrc T___T
 
 ### Git is powerful, we should take a selfie with it ("snapshot" joke, get it? :smile::smile::smile:)
 * copy .git-completion.bash file ([source](https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash))
