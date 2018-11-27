@@ -2,11 +2,12 @@
 
 **Note**: make sure you are in home directory (type `cd` or `~`)
 * All-Inclusive option: clone this repo and move all files to home directory (note: use `ls -a` to see the dotfiles)
-* For Windows: download nodeJS, install, and add cowsay package (`npm install -g cowsay`)
 
 ### Set up your shell / terminal / bash environment
 * copy .bashrc (**AWESOME**)
   * to make sure this file get run: `source ~/.bashrc`
+  * For Windows: download nodeJS, install, and add cowsay package (`npm install -g cowsay`)
+  * For Windows: also copy .bash_profile
 
 ### Git is powerful, we should take a selfie with it ("snapshot" joke, get it? :smile::smile::smile:)
 * copy .git-completion.bash file ([source](https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash))
