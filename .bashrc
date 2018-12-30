@@ -1,6 +1,13 @@
 # to install fun cow fortune, run this command in terminal: 'brew install cowsay'
 fortune | cowsay -f small
-cowsay -f tux "Meowww... you look beautiful today."
+
+GITHUB_API=$(curl -s https://api.github.com/zen)
+# the -s flag is 'silent', which means no show curl progress bar
+# <<<"$GITHUB_API" sed # this line will print output to terminal
+cowsay -f tux "$GITHUB_API"
+
+# cowsay -f tux "Meowww... you look beautiful today."
+
 cowthink -e ^^`Date`
 
 # export PATH="$PATH:/c/Python36"                 # enable python on windows
