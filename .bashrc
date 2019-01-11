@@ -49,7 +49,7 @@ alias grao="git remote add origin"
 # alias grau="git remote add upstream"
 # alias grat="git remote add temp"
 
-alias log="git log --oneline --graph"
+alias log="git log --oneline --graph -15"
 alias logp1="git log -p -1"           # show the difference (patch output) for the last commit
 alias logp2="git log -p -2"           # show the different for the last 2 commits
 alias glm="git log master.."          # show changes since you branches off master forward
