@@ -1,5 +1,5 @@
 # to install fun cow fortune, run this command in terminal: 'brew install cowsay'
-fortune | cowsay -f small
+# fortune | cowsay -f small
 
 GITHUB_API=$(curl -s https://api.github.com/zen)
 # the -s flag is 'silent', which means no show curl progress bar
@@ -49,6 +49,19 @@ alias grao="git remote add origin"
 # alias grau="git remote add upstream"
 # alias grat="git remote add temp"
 
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
+# if [ -f /sw/etc/bash_completion ]; then
+ # . /sw/etc/bash_completion
+# fi
+# setup autocompletion
+if [ -f "/usr/local/etc/profile.d/bash_completion.sh" ]; then
+  source /usr/local/etc/profile.d/bash_completion.sh
+  __git_complete gco _git_checkout
+else
+  echo "Error loading git completions"
+fi
+
 alias log="git log --oneline --graph -15"
 alias logp1="git log -p -1"           # show the difference (patch output) for the last commit
 alias logp2="git log -p -2"           # show the different for the last 2 commits
@@ -90,4 +103,8 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 
 source ~/.git-prompt.sh
 
-export PATH="$PATH:`yarn global bin`"
+# export PATH="$PATH:`yarn global bin`"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
