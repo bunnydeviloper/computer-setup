@@ -29,10 +29,9 @@ alias src="source ~/.bashrc"          # alias to refresh the environment if you 
 alias g="git"
 alias gs="git status"
 alias gd="git diff"
-alias ga="git add ."
-alias gA="git add -A"
+alias ga="git add" # to add all: `ga .`, to add new files `ga -N`
 alias gcm="git commit -m"
-alias gca="git commit --amend"
+alias gamend="git commit --amend --no-edit" # add new changes to last commit
 alias gn="git status && git add . && git commit -m"     # shortcut to save new commit
 alias gN="git status && git add -A && git commit -m"    # shortcut to save new commit all files
 
@@ -40,20 +39,13 @@ alias gb="git branch"
 alias gco="git checkout"
 alias gf="git fetch"
 alias rb="git rebase origin/master"
-alias gfrb="git fetch && git rebase origin/master"      # to be used when ABSOLUTELY sure
-alias push="git push -u origin master"  # flag -u will make sure git add tracking to origin/master
-
-alias gcl="git clone"
+alias p="git push -u origin" # then add your own branch `p spmai/feature1`
+alias pmaster="git push -u origin master"  # flag -u will make sure git add tracking to origin/master
 alias gv="git remote -v"
-alias grao="git remote add origin"
-# alias grau="git remote add upstream"
-# alias grat="git remote add temp"
 
+# install bash_completion with `brew install bash_completion@2`
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
-# if [ -f /sw/etc/bash_completion ]; then
- # . /sw/etc/bash_completion
-# fi
 # setup autocompletion
 if [ -f "/usr/local/etc/profile.d/bash_completion.sh" ]; then
   source /usr/local/etc/profile.d/bash_completion.sh
@@ -63,9 +55,9 @@ else
 fi
 
 alias log="git log --oneline --graph -15"
-alias logp1="git log -p -1"           # show the difference (patch output) for the last commit
-alias logp2="git log -p -2"           # show the different for the last 2 commits
-alias glm="git log master.."          # show changes since you branches off master forward
+alias log1="git log -p -1"           # show the difference (patch output) for the last commit
+alias log2="git log -p -2"           # show the different for the last 2 commits
+alias logm="git log master.."          # show changes since you branches off master forward
 alias loga="git log --oneline --graph --stat -p --all"
 
 # Useful commands - lcd changes directory and ls
