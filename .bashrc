@@ -22,12 +22,20 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx          # Light Blue for Directories
 # OR you can use this: alias ls="ls -G"         # Royal Blue
 
 export EDITOR=vim
+# export LESS="-MN"                   # -M shows information bar at bottom, -N shows line number
 
 # Other useful alias
 alias llip="ssh sophiaaa@llip.life"   # alias to ssh into garageScript
 alias l="ls -aF"                      # list all files (including hidden) in short format, flag -F will add special char. at the end
-alias ll="ls -aFl"                    # long format
+alias ll="ls -laFhG"                  # long format, include hidden, indicate file type, humanize file size, colorize output
 alias src="source ~/.bashrc"          # alias to refresh the environment if you make changes to .bashrc
+# alias h="history"
+# alias mv="mv -i"
+# alias rm="rm -i"
+# alias cp="cp -i"
+# alias df="df -h"
+# alias du="du -h"
+# alias mkdir="mkdir -p"
 
 # Alias for git
 alias g="git"
@@ -102,5 +110,12 @@ source ~/.git-prompt.sh
 # export PATH="$PATH:`yarn global bin`"
 
 export NVM_DIR="$HOME/.nvm"
+
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# !$ will use previous command's argument for current command
+# ps aux, top, | head, tail -f,...
+# find, 
+# sort old.txt > sorted.txt (>> will append, > will overwrite)
+# uniq old.txt, echo "(3*4)+(11+47)" | bc, echo "Hello" | wc
