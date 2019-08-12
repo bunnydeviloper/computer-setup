@@ -1,3 +1,7 @@
+echo -n "Welcome "; whoami; echo ""
+cal
+echo ""; echo -n "Uptime: "; uptime; echo ""
+
 # to install fun cow fortune, run this command in terminal: 'brew install cowsay'
 # fortune | cowsay -f small
 
