@@ -22,20 +22,30 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx          # Light Blue for Directories
 # OR you can use this: alias ls="ls -G"         # Royal Blue
 
 export EDITOR=vim
-# export LESS="-MN"                   # -M shows information bar at bottom, -N shows line number
+export LESS="-MN"                     # -M shows information bar at bottom, -N shows line number
 
 # Other useful alias
 alias llip="ssh sophiaaa@llip.life"   # alias to ssh into garageScript
 alias l="ls -aF"                      # list all files (including hidden) in short format, flag -F will add special char. at the end
 alias ll="ls -laFhG"                  # long format, include hidden, indicate file type, humanize file size, colorize output
 alias src="source ~/.bashrc"          # alias to refresh the environment if you make changes to .bashrc
-# alias h="history"
-# alias mv="mv -i"
-# alias rm="rm -i"
+
+alias h="history"
+alias mv="mv -i"
+alias rm="rm -i"
 # alias cp="cp -i"
 # alias df="df -h"
 # alias du="du -h"
 # alias mkdir="mkdir -p"
+
+# Alias for MBU
+alias ml="mbu launch outlookall debug"
+alias mb="mbu build outlookall debug"
+alias mbd="mbu build --retry -d -m outlook -c debug ship"
+alias fl="findlurkers | zsh"
+
+alias mupdate="bash ~/Scripts/Build.sh"
+alias blog="less ~/Scripts/Build_Output.log"
 
 # Alias for git
 alias g="git"
@@ -72,12 +82,12 @@ alias log2="git log -p -2"           # show the different for the last 2 commits
 alias logm="git log master.."          # show changes since you branches off master forward
 alias loga="git log --oneline --graph --stat -p --all"
 
-# Useful commands - lcd changes directory and ls
+# Useful commands: changes directory and ls
 function changeDirectory {
   cd $1;
   ls -aF .
 }
-alias cl=changeDirectory
+alias cdl=changeDirectory
 # Quickly jumps to parent directores
 alias .='cl ..'
 alias ..='cl ../..'
@@ -88,8 +98,15 @@ source ~/.git-completion.bash
 
 # Bash command history
 HISTCONTROL=ignoredups:erasedups
-shopt -s histappend
+# append history list to HISTFILE when shell exits (rather than overwrite)
+shopt -s histappend # (-s: set) shell-optional behavior: histappend
+
+# Update history every time we execute a prompt command so we don't lose track of all shell sessions
 PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+# -n: append current Bash session's history to the current history list
+# -w: write the current history list to the history file
+# -c: clear history for the current shell
+# -r: re-read the whole history from the history file
 
 # colors!
 Green="\[\033[0;32m\]"         # Green
@@ -100,6 +117,7 @@ reset="\[\033[0m\]"
 
 # Change command prompt, explain: $red\username $Green\gitbranch $Yellow\dir-fullpath $greenblue\time12a $
 export PS1="$red\u$Green\$(__git_ps1) $Yellow\w $greenblue\@ $
+# export PS1="$Green\h #red\u$ $Yellow\w $greenblue\@ $
 $reset" # start typing on the next line
 
 # show a * or + next to branch name if it's been modified
