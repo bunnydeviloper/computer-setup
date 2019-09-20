@@ -97,9 +97,13 @@ alias ...='cl ../../..'
 source ~/.git-completion.bash
 
 # Bash command history
-HISTCONTROL=ignoredups:erasedups
+HISTCONTROL=ignoredups:erasedups            # OR ignoreboth === ignoredups:ignorespace
 # append history list to HISTFILE when shell exits (rather than overwrite)
 shopt -s histappend # (-s: set) shell-optional behavior: histappend
+export HISTSIZE=10000                       # 500 is default
+export HISTFILESIZE=1000000
+# export HISTTIMEFORMAT='%b %d %I:%M %p'       # using strftime format
+# export HISTIGNORE="history:pwd:exit:df:ls:ls -la:ll"
 
 # Update history every time we execute a prompt command so we don't lose track of all shell sessions
 PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
