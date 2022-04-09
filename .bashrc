@@ -8,7 +8,7 @@ echo ""; echo -n "Uptime: "; uptime; echo ""
 GITHUB_API=$(curl -s https://api.github.com/zen)
 # the -s flag is 'silent', which means no show curl progress bar
 # <<<"$GITHUB_API" sed # this line will print output to terminal
-cowsay -f tux "$GITHUB_API"
+cowsay -f tux "$GITHUB_API" # flag -f is to use specific picture, this case "tux" is the Linux penguin
 
 # cowsay -f tux "Meowww... you look beautiful today."
 
