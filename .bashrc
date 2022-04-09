@@ -12,7 +12,7 @@ cowsay -f tux "$GITHUB_API" # flag -f is to use specific picture, this case "tux
 # cowsay -f tux "Meowww... you look beautiful today."
 cowthink -e ^^ `Date` # make the eye looks like "^^", and the thought is the current date time
 # cowsay -T U Bhahaha # make the tongue sticks out
-
+echo # adds empty line on screen
 
 # export PATH="$PATH:/c/Python36"                 # enable python on windows
 
