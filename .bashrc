@@ -37,6 +37,7 @@ alias rm="rm -i"
 # alias df="df -h"
 # alias du="du -h"
 # alias mkdir="mkdir -p"
+# alias open="start" # for windows machine
 
 # Alias for MBU
 alias ml="mbu launch outlookall debug"
