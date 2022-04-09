@@ -14,6 +14,8 @@
 ### Git is powerful, we should take a selfie with it ("snapshot" joke, get it? :smile::smile::smile:)
 * copy .git-completion.bash file ([source](https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash))
 * copy .git-prompt.sh ([source](https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh))
+(Note: you may need to search for updated versions)
+
 * simple first time git configuration: (see more in .gitconfig)
   * git config --global user.name "<Your-Full-Name>"
   * git config --global user.email "<your-email-address>"
