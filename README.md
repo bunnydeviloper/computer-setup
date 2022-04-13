@@ -22,6 +22,7 @@
   * git config --global color.ui auto
   * git config --global merge.conflictstyle diff3
   * git config --list // view all current configuration
+  * git config --global --replace-all core.pager "less -r -F -X" // prevent git log from showing ESC characters
 
 ### Vim is for pro-programmers, but remmeber: 'Your computer is only as smart as you are!'
 * copy .vimrc (file credit: multiple sources, from the best of the best, including some from myself :smile::smile::smile:)
