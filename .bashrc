@@ -22,7 +22,13 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx          # Light Blue for Directories
 # OR you can use this: alias ls="ls -G"         # Royal Blue
 
 export EDITOR=vim
-export LESS="-MN"                     # -M shows information bar at bottom, -N shows line number
+#export LESS="-MNFX"                    # -M shows information bar at bottom
+                                        # -N shows line number
+                                        # -F exit if content can be displayed on first screen
+                                        # -X prevent clearing screen after quitting
+                                        # => disblae all this because it seems to be the default
+                                        # https://phoenixnap.com/kb/less-command-in-linux
+                                        # https://www.topbug.net/blog/2016/09/27/make-gnu-less-more-powerful/
 
 # Other useful alias
 alias llip="ssh sophiaaa@llip.life"   # alias to ssh into garageScript
