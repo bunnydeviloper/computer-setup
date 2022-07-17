@@ -71,6 +71,7 @@ alias rb="git rebase origin/master"
 alias p="git push -u origin" # then add your own branch `p spmai/feature1`
 alias pmaster="git push -u origin master"  # flag -u will make sure git add tracking to origin/master
 alias gv="git remote -v"
+alias prune="git remote prune origin" # prunes tracking branches not on the remote.
 
 # install bash_completion with `brew install bash_completion@2`
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
