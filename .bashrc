@@ -101,6 +101,20 @@ alias .='cl ..'
 alias ..='cl ../..'
 alias ...='cl ../../..'
 
+# Clean desktop shortcuts when automatic updates create them
+function removeShortcuts {
+  echo "=== Go to Desktop folder and list all files ==="
+  cd
+  cd Desktop/
+  ls
+  echo "=== Removing shortcuts... ==="
+  rm -rf Discord.lnk*
+  rm -rf Postman.lnk*
+  echo "=== Done removing shortcuts, list all files ==="
+  ls
+}
+alias cleanDesktop=removeShortcuts
+
 # Enable tab completion
 source ~/.git-completion.bash
 
