@@ -105,8 +105,7 @@ alias ...='cl ../../..'
 function removeShortcuts {
   echo "=== Copy current path, go to Desktop and list all files ==="
   dir=$(pwd)
-  cd
-  cd Desktop/
+  cd ~/Desktop/
   ls
   echo "=== Removing shortcuts... ==="
   rm -rf Discord.lnk*
